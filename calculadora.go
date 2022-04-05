@@ -9,15 +9,20 @@ import (
 )
 
 func main() {
-	scanner := bufio.NewScanner(os.Stdin) // Creamos un scanner para que el usuario pueda digitar.
+	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
-	operacion := scanner.Text() // Convierte el scanner a string.
+	operacion := scanner.Text()
 	fmt.Println(operacion)
-	valores := strings.Split(operacion, "+") // Con Split separa la cadena de texto.
+	valores := strings.Split(operacion, "+")
 	fmt.Println(valores)
 	fmt.Println(valores[0] + valores[1])
-	operador1, _ := strconv.Atoi(valores[0]) //Atoi devuelve 2 valores.
-	operador2, _ := strconv.Atoi(valores[0]) // El "_" nos dice que no utilizaremos la otra variable.
+	operador1, err1 := strconv.Atoi(valores[0])
+	if err1 != nil { // Si el valor es nulo quiere decir que el error nunca paso.
+		fmt.Println(err1)
+	} else {
+		fmt.Println(operador1)
+	}
+	operador2, _ := strconv.Atoi(valores[1])
 	fmt.Println(operador1 + operador2)
 
 }
