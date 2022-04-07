@@ -14,6 +14,22 @@ func (t *taskList) eliminarDeLista(index int) {
 	t.tasks = append(t.tasks[:index], t.tasks[index+1:]...)
 }
 
+func (t *taskList) imprimirLista() {
+	for _, tarea := range t.tasks { // Usamos "_" porque no vamos a utilizar el indice, sino que solo el valor.
+		fmt.Println("Nombre", tarea.nombre)
+		fmt.Println("Descripcion", tarea.descripcion)
+	}
+}
+
+func (t *taskList) imprimirListaCompletados() {
+	for _, tarea := range t.tasks {
+		if tarea.completado {
+			fmt.Println("Nombre", tarea.nombre)
+			fmt.Println("Descripcion", tarea.descripcion)
+		}
+	}
+}
+
 type task struct {
 	nombre      string
 	descripcion string
@@ -55,26 +71,8 @@ func main() {
 	}
 
 	lista.agregarALista(t3)
-
-	for i := 0; i < len(lista.tasks); i++ {
-		fmt.Println("Index", i, "Nombre", lista.tasks[i].nombre)
-	}
-
-	for index, tarea := range lista.tasks { // range devuelve 2 valores y a la vez crea un iterador que recorre el ciclo.
-		fmt.Println("Index", index, "Nombre", tarea.nombre)
-	}
-
-	for i := 0; i < 10; i++ {
-		if i == 5 {
-			break // break lo que hace es parar el ciclo en esa condicion.
-		}
-		fmt.Println(i)
-	}
-
-	for i := 0; i < 10; i++ {
-		if i == 5 {
-			continue // Simplemente rompe la iteracion, pero el ciclo continua.
-		}
-		fmt.Println(i)
-	}
+	lista.imprimirLista()
+	lista.tasks[0].marcarCompleta()
+	fmt.Println("Tareas completadas")
+	lista.imprimirListaCompletados()
 }
