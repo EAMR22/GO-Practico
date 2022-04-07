@@ -73,6 +73,32 @@ func main() {
 	lista.agregarALista(t3)
 	lista.imprimirLista()
 	lista.tasks[0].marcarCompleta()
-	fmt.Println("Tareas completadas")
-	lista.imprimirListaCompletados()
+	//fmt.Println("Tareas completadas")
+	lista.imprimirListaCompletados() // Imprime el nombre y descripcion de la primera tarea.
+
+	mapaTareas := make(map[string]*taskList)
+	mapaTareas["Nestor"] = lista
+
+	t4 := &task{
+		nombre:      "Completar mi curso de Java",
+		descripcion: "Completar mi curso de Java de Platzi esta semana",
+	}
+
+	t5 := &task{
+		nombre:      "Completar mi curso de C#",
+		descripcion: "Completar mi curso de C# de Platzi esta semana",
+	}
+
+	lista2 := &taskList{
+		tasks: []*task{
+			t4, t5,
+		},
+	}
+
+	mapaTareas["Ricardo"] = lista2
+
+	fmt.Println("Tareas de Nestor:")
+	mapaTareas["Nestor"].imprimirLista()
+	fmt.Println("Tareas de Ricardo:")
+	mapaTareas["Ricardo"].imprimirLista()
 }
