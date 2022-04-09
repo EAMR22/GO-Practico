@@ -15,6 +15,11 @@ func NewRouter() *Router {
 	}
 }
 
-func (r *Router) ServerHTTP(w http.ResponseWriter, request *http.Request) { // parametros: el primero es el escritor, el segundo es el request en donde viene la informacion
-	fmt.Fprintf(w, "Hello World!") // Fprintf utiliza un escritor, que recive w que es el escritor asignado, y el mensaje que queremos mostrar.
+func (r *Router) FindHandler(path string) (http.HandlerFunc, bool) {
+	handler, exist := r.rules[path]
+	return handler, exist
+}
+
+func (r *Router) ServerHTTP(w http.ResponseWriter, request *http.Request) {
+	fmt.Fprintf(w, "Hello World!")
 }
