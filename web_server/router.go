@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -21,5 +20,12 @@ func (r *Router) FindHandler(path string) (http.HandlerFunc, bool) {
 }
 
 func (r *Router) ServerHTTP(w http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+	handler, exist := r.FindHandler(request.URL.Path)
+
+	if !exist {
+		w.WriteHeader(http.StatusNotFound)
+		return // Es una manera de decirle a la funcion que pare la ejecucion
+	}
+
+	handler(w, request)
 }
